@@ -59,12 +59,17 @@ const VoiceAgent = () => {
   
       const data = await response.json();
   
-      // Add primary response
+      // 🚫 If mediation_triggered is false or missing, don't show anything
+      if (!data.mediation_triggered) {
+        return;
+      }
+  
+      // ✅ Add primary response
       if (data.response) {
         setMessages(prev => [...prev, { type: 'bot', text: data.response }]);
       }
   
-      // Add extras only if they exist
+      // ✅ Add extras if available
       const extras = {
         "🔍 Observation": data.observations,
         "❤️ Feelings": data.feelings,
@@ -87,7 +92,6 @@ const VoiceAgent = () => {
     }
   };
   
-
   const startVoiceAgent = () => {
     if (!isConnected) {
       setIsConnected(true);
