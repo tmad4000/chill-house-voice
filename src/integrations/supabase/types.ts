@@ -9,7 +9,110 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      mediation_events: {
+        Row: {
+          conflict_detected: boolean | null
+          conversation_id: string | null
+          created_at: string
+          id: string
+          mediation_response: string | null
+          trigger_message_id: string | null
+        }
+        Insert: {
+          conflict_detected?: boolean | null
+          conversation_id?: string | null
+          created_at?: string
+          id?: string
+          mediation_response?: string | null
+          trigger_message_id?: string | null
+        }
+        Update: {
+          conflict_detected?: boolean | null
+          conversation_id?: string | null
+          created_at?: string
+          id?: string
+          mediation_response?: string | null
+          trigger_message_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mediation_events_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "signal_conversations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mediation_events_trigger_message_id_fkey"
+            columns: ["trigger_message_id"]
+            isOneToOne: false
+            referencedRelation: "signal_messages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      signal_conversations: {
+        Row: {
+          created_at: string
+          group_id: string
+          group_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          group_id: string
+          group_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          group_id?: string
+          group_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      signal_messages: {
+        Row: {
+          conversation_id: string | null
+          id: string
+          is_bot_message: boolean | null
+          message_text: string | null
+          sender_name: string | null
+          sender_phone: string
+          timestamp: string
+        }
+        Insert: {
+          conversation_id?: string | null
+          id?: string
+          is_bot_message?: boolean | null
+          message_text?: string | null
+          sender_name?: string | null
+          sender_phone: string
+          timestamp?: string
+        }
+        Update: {
+          conversation_id?: string | null
+          id?: string
+          is_bot_message?: boolean | null
+          message_text?: string | null
+          sender_name?: string | null
+          sender_phone?: string
+          timestamp?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "signal_messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "signal_conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

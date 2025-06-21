@@ -1,11 +1,13 @@
 
 import { Button } from "@/components/ui/button";
-import { MessageCircle, Bot } from "lucide-react";
+import { MessageCircle, Bot, Phone } from "lucide-react";
 
 const Hero = () => {
-  const handleAddToChat = () => {
-    // This would integrate with group chat platforms like Discord, Slack, etc.
-    window.open("https://discord.com/oauth2/authorize?client_id=your-bot-id&permissions=2048&scope=bot", "_blank");
+  const handleAddToSignal = () => {
+    // Copy webhook URL to clipboard
+    const webhookUrl = "https://cqxqvxfpvcdnympknfql.supabase.co/functions/v1/signal-webhook";
+    navigator.clipboard.writeText(webhookUrl);
+    alert("Signal webhook URL copied to clipboard! Configure your Signal bot to send messages to this endpoint.");
   };
 
   return (
@@ -31,22 +33,22 @@ const Hero = () => {
           </h1>
           
           <p className="mt-6 text-xl leading-8 text-gray-600 sm:text-2xl">
-            The AI mediator that keeps your Hacker house drama-free
+            The AI mediator that keeps your Signal groups drama-free
           </p>
           
           <p className="mt-4 text-lg leading-8 text-gray-500 max-w-2xl mx-auto">
-            From heated coding debates to roommate conflicts, PeaceKeeper listens, understands, and steps in with thoughtful mediation when tensions rise.
+            From heated coding debates to roommate conflicts, PeaceKeeper listens to your Signal conversations and steps in with thoughtful mediation when tensions rise.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
             <Button 
-              onClick={handleAddToChat}
+              onClick={handleAddToSignal}
               size="lg" 
               className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
             >
-              <MessageCircle className="w-5 h-5 mr-2" />
-              Add to Group Chat
+              <Phone className="w-5 h-5 mr-2" />
+              Get Signal Webhook URL
             </Button>
             
             <Button 
@@ -60,9 +62,20 @@ const Hero = () => {
             </Button>
           </div>
 
+          {/* Signal Setup Instructions */}
+          <div className="mt-12 p-6 bg-blue-50 rounded-2xl border border-blue-200">
+            <h3 className="text-lg font-semibold text-blue-900 mb-3">Quick Setup for Signal</h3>
+            <div className="text-sm text-blue-800 text-left space-y-2">
+              <p><strong>1.</strong> Click "Get Signal Webhook URL" to copy the webhook endpoint</p>
+              <p><strong>2.</strong> Configure your Signal bot to send group messages to this URL</p>
+              <p><strong>3.</strong> PeaceKeeper will automatically monitor conversations and mediate conflicts</p>
+              <p><strong>4.</strong> The bot uses GPT-4 to provide intelligent, context-aware mediation</p>
+            </div>
+          </div>
+
           {/* Trust indicators */}
           <div className="mt-16 pt-8 border-t border-gray-200">
-            <p className="text-sm text-gray-500 mb-4">Trusted by Hacker houses worldwide</p>
+            <p className="text-sm text-gray-500 mb-4">Trusted by Signal groups worldwide</p>
             <div className="flex justify-center items-center space-x-8 opacity-60">
               <div className="text-2xl font-bold text-gray-400">Y Combinator</div>
               <div className="text-2xl font-bold text-gray-400">Recurse Center</div>
