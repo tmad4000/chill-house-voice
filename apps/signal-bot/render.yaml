@@ -11,3 +11,5 @@ services:
         value: +16507619680
       - key: WEBHOOK_URL
         value: https://cqxqvxfpvcdnympknfql.supabase.co/functions/v1/signal-webhook
+      - key: SIGNAL_API_URL
+        value: http://localhost:8080
