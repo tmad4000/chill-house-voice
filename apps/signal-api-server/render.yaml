@@ -1,0 +1,17 @@
+
+services:
+  - type: web
+    name: signal-cli-rest-api
+    env: docker
+    rootDir: apps/signal-api-server
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /v1/about
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: JAVA_OPTS
+        value: "-Xmx512m"
+    disk:
+      name: signal-data
+      mountPath: /app/data
+      sizeGB: 1

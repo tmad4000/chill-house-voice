@@ -12,4 +12,5 @@ services:
       - key: WEBHOOK_URL
         value: https://cqxqvxfpvcdnympknfql.supabase.co/functions/v1/signal-webhook
       - key: SIGNAL_API_URL
-        value: http://localhost:8080
+        value: https://signal-cli-rest-api.onrender.com
+        # ↑ You'll need to update this with your actual Signal API service URL after deployment
