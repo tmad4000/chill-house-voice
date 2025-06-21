@@ -7,7 +7,7 @@ const VoiceAgent = () => {
   const [isListening, setIsListening] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [transcript, setTranscript] = useState("");
-  const [messages, setMessages] = useState<Array<{type: 'user' | 'bot', text: string}>>([]);
+  const [messages, setMessages] = useState<Array<{ type: 'user' | 'bot', text: string }>>([]);
   const recognitionRef = useRef<any>(null);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const VoiceAgent = () => {
       recognitionRef.current = new SpeechRecognition();
       recognitionRef.current.continuous = true;
       recognitionRef.current.interimResults = true;
-      
+
       recognitionRef.current.onresult = (event: any) => {
         let finalTranscript = '';
         for (let i = event.resultIndex; i < event.results.length; i++) {
@@ -38,28 +38,62 @@ const VoiceAgent = () => {
     }
   }, []);
 
-  const handleUserMessage = (message: string) => {
+  const handleUserMessage = async (message: string) => {
+    // Show user's message immediately
     setMessages(prev => [...prev, { type: 'user', text: message }]);
-    
-    // Simulate AI response
-    setTimeout(() => {
-      const responses = [
-        "I understand there's some tension here. Let's take a step back and listen to each other's perspectives.",
-        "It sounds like both sides have valid concerns. Can we focus on finding a solution that works for everyone?",
-        "I notice the conversation is getting heated. Would it help if we took a short break and reconvened in a few minutes?",
-        "Let me help facilitate this discussion. Can each person share their main concern without interruption?"
+
+    try {
+      const response = await fetch("https://mediator-bot.onrender.com/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: [{ role: "user", content: message }],
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server responded with status ${response.status}`);
+      }
+
+      const data = await response.json(); // Expecting full mediation object
+
+      // Show the main response field
+      setMessages(prev => [
+        ...prev,
+        { type: 'bot', text: data.response }
+      ]);
+
+      // Optionally, show extra mediation insights (observations, feelings, etc.)
+      // Comment this out if you want it simpler
+      const extras = [
+        `🔍 Observation: ${data.observations}`,
+        `❤️ Feelings: ${data.feelings}`,
+        `💡 Needs: ${data.needs}`,
+        `🗣️ Request: ${data.requests}`
       ];
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      setMessages(prev => [...prev, { type: 'bot', text: randomResponse }]);
-    }, 1000);
+
+      for (const extra of extras) {
+        setMessages(prev => [...prev, { type: 'bot', text: extra }]);
+      }
+
+    } catch (err) {
+      console.error("Chat error:", err);
+      setMessages(prev => [...prev, {
+        type: 'bot',
+        text: "⚠️ Sorry, something went wrong. Please try again."
+      }]);
+    }
   };
+
 
   const startVoiceAgent = () => {
     if (!isConnected) {
       setIsConnected(true);
       setMessages([{ type: 'bot', text: "Hi everyone! I'm PeaceKeeper, your AI mediator. I'm here to help facilitate productive conversations. What's going on?" }]);
     }
-    
+
     if (recognitionRef.current && !isListening) {
       setIsListening(true);
       recognitionRef.current.start();
@@ -103,11 +137,10 @@ const VoiceAgent = () => {
                 className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-xs px-4 py-2 rounded-lg ${
-                    message.type === 'user'
+                  className={`max-w-xs px-4 py-2 rounded-lg ${message.type === 'user'
                       ? 'bg-indigo-500 text-white'
                       : 'bg-white text-gray-800 shadow-sm border'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center mb-1">
                     {message.type === 'bot' && <Bot className="w-4 h-4 mr-1 text-indigo-500" />}
@@ -156,7 +189,7 @@ const VoiceAgent = () => {
         {!isConnected && (
           <div className="mt-6 p-4 bg-amber-50 rounded-lg border border-amber-200">
             <p className="text-sm text-amber-800">
-              <strong>Demo Mode:</strong> This simulates the voice agent experience. 
+              <strong>Demo Mode:</strong> This simulates the voice agent experience.
               Click "Start Voice Agent" to begin, then speak naturally. The AI will respond with mediation suggestions.
             </p>
           </div>
