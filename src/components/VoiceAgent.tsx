@@ -39,45 +39,45 @@ const VoiceAgent = () => {
   }, []);
 
   const handleUserMessage = async (message: string) => {
-    // Show user's message immediately
+    // Show user's message
     setMessages(prev => [...prev, { type: 'user', text: message }]);
-
+  
     try {
       const response = await fetch("https://mediator-bot.onrender.com/chat", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           messages: [{ role: "user", content: message }],
         }),
       });
-
+  
       if (!response.ok) {
+        const text = await response.text();
+        console.error("Server Error Response:", text);
         throw new Error(`Server responded with status ${response.status}`);
       }
-
-      const data = await response.json(); // Expecting full mediation object
-
-      // Show the main response field
-      setMessages(prev => [
-        ...prev,
-        { type: 'bot', text: data.response }
-      ]);
-
-      // Optionally, show extra mediation insights (observations, feelings, etc.)
-      // Comment this out if you want it simpler
-      const extras = [
-        `🔍 Observation: ${data.observations}`,
-        `❤️ Feelings: ${data.feelings}`,
-        `💡 Needs: ${data.needs}`,
-        `🗣️ Request: ${data.requests}`
-      ];
-
-      for (const extra of extras) {
-        setMessages(prev => [...prev, { type: 'bot', text: extra }]);
+  
+      const data = await response.json();
+  
+      // Add primary response
+      if (data.response) {
+        setMessages(prev => [...prev, { type: 'bot', text: data.response }]);
       }
-
+  
+      // Add extras only if they exist
+      const extras = {
+        "🔍 Observation": data.observations,
+        "❤️ Feelings": data.feelings,
+        "💡 Needs": data.needs,
+        "🗣️ Request": data.requests
+      };
+  
+      for (const [label, value] of Object.entries(extras)) {
+        if (value) {
+          setMessages(prev => [...prev, { type: 'bot', text: `${label}: ${value}` }]);
+        }
+      }
+  
     } catch (err) {
       console.error("Chat error:", err);
       setMessages(prev => [...prev, {
@@ -86,7 +86,7 @@ const VoiceAgent = () => {
       }]);
     }
   };
-
+  
 
   const startVoiceAgent = () => {
     if (!isConnected) {
