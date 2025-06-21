@@ -1,0 +1,13 @@
+
+services:
+  - type: web
+    name: signal-mediation-bot
+    env: python
+    rootDir: apps/signal-bot
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    envVars:
+      - key: SIGNAL_NUMBER
+        value: +16507619680
+      - key: WEBHOOK_URL
+        value: https://cqxqvxfpvcdnympknfql.supabase.co/functions/v1/signal-webhook

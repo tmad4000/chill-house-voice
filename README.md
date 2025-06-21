@@ -1,73 +1,90 @@
-# Welcome to your Lovable project
 
-## Project info
+# Signal Mediation Monorepo
 
-**URL**: https://lovable.dev/projects/a3e8e1c6-cade-49b1-ae25-13ea6bd5d205
+A complete Signal group chat mediation system with AI-powered conflict resolution.
 
-## How can I edit this code?
+## 🏗️ Project Structure
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/a3e8e1c6-cade-49b1-ae25-13ea6bd5d205) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+signal-mediation-monorepo/
+├── apps/
+│   ├── web/           # Lovable React frontend + Supabase functions
+│   └── signal-bot/    # Python Signal bot
+├── docs/              # Documentation
+└── README.md
 ```
 
-**Edit a file directly in GitHub**
+## 🚀 Quick Start
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Frontend (Lovable Web App)
+1. The web app is automatically deployed via Lovable
+2. Contains the PeaceKeeper dashboard and webhook endpoint
+3. Built with React, TypeScript, Tailwind CSS, and Supabase
 
-**Use GitHub Codespaces**
+### Signal Bot (Python)
+1. Navigate to `apps/signal-bot/`
+2. Copy `.env.example` to `.env` and configure your Signal number
+3. Deploy to Render using the provided `render.yaml` configuration
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🔧 Configuration
 
-## What technologies are used for this project?
+### Environment Variables
 
-This project is built with:
+**Signal Bot (`apps/signal-bot/.env`):**
+- `SIGNAL_NUMBER`: Your Signal phone number (e.g., +16507619680)
+- `WEBHOOK_URL`: Your Lovable app's webhook URL
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Deployment
 
-## How can I deploy this project?
+**Frontend:**
+- Automatically deployed via Lovable
+- Webhook URL: `https://your-project-id.supabase.co/functions/v1/signal-webhook`
 
-Simply open [Lovable](https://lovable.dev/projects/a3e8e1c6-cade-49b1-ae25-13ea6bd5d205) and click on Share -> Publish.
+**Signal Bot:**
+- Deploy to Render pointing to `apps/signal-bot/` directory
+- Uses the provided `render.yaml` configuration
 
-## Can I connect a custom domain to my Lovable project?
+## 📖 How It Works
 
-Yes, you can!
+1. **Signal Bot** listens to group messages
+2. **Webhook** receives message data and analyzes for conflicts using GPT-4
+3. **AI Mediation** generates appropriate responses when tension is detected
+4. **Response** is sent back to the Signal group via the bot
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🛠️ Development
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### Local Development
+```bash
+# Frontend
+cd apps/web
+npm install
+npm run dev
+
+# Signal Bot
+cd apps/signal-bot
+pip install -r requirements.txt
+python main.py
+```
+
+### Adding Features
+- Frontend changes: Use Lovable editor
+- Bot changes: Edit files in `apps/signal-bot/`
+- Database changes: Use Supabase migrations in `apps/web/supabase/`
+
+## 📚 Documentation
+
+- [Setup Guide](docs/setup-guide.md)
+- [Deployment Guide](docs/deployment.md)
+- [API Documentation](docs/api.md)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test both frontend and bot
+5. Submit a pull request
+
+## 📄 License
+
+MIT License - see LICENSE file for details
