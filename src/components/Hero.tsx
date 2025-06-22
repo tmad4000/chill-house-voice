@@ -104,14 +104,14 @@ const Hero = () => {
             {/* Commands Section */}
             <div className="mt-6 pt-4 border-t border-blue-200">
               <h4 className="text-base font-semibold text-blue-900 mb-3">Available Commands:</h4>
-              <div className="space-y-2">
-                <div className="flex items-center px-3 py-2 bg-white rounded-lg border border-blue-100">
+              <div className="space-y-2 flex flex-col items-center">
+                <div className="inline-flex items-center px-3 py-2 bg-white rounded-lg border border-blue-100">
                   <code className="text-sm font-mono bg-blue-50 px-2 py-1 rounded text-blue-700">
                     @mediatorbot pause
                   </code>
                   <span className="text-sm text-blue-600 ml-2">Pause monitoring</span>
                 </div>
-                <div className="flex items-center px-3 py-2 bg-white rounded-lg border border-blue-100">
+                <div className="inline-flex items-center px-3 py-2 bg-white rounded-lg border border-blue-100">
                   <code className="text-sm font-mono bg-blue-50 px-2 py-1 rounded text-blue-700">
                     @mediatorbot continue
                   </code>
