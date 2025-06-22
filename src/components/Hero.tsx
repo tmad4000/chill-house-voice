@@ -11,11 +11,6 @@ const Hero = () => {
     alert("Signal webhook URL copied to clipboard! Configure your Signal bot to send messages to this endpoint.");
   };
 
-  const handleCallMediatorBot = () => {
-    // Scroll to voice agent section
-    document.getElementById('voice-agent')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   const handleWebVoiceAgent = () => {
     // Scroll to voice agent section
     document.getElementById('voice-agent')?.scrollIntoView({ behavior: 'smooth' });
@@ -51,16 +46,26 @@ const Hero = () => {
             From heated coding debates to roommate conflicts, MediatorBot listens to your Signal conversations and steps in with thoughtful mediation when tensions rise.
           </p>
 
+          {/* Phone Number Display */}
+          <div className="mt-8 mb-6">
+            <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl border border-green-200">
+              <Phone className="w-5 h-5 text-green-600 mr-3" />
+              <span className="text-2xl font-bold text-green-800 tracking-wide">
+                +1 (555) 123-PEACE
+              </span>
+            </div>
+            <p className="text-sm text-gray-500 mt-2">Call anytime for instant mediation support</p>
+          </div>
+
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-            <Button 
-              onClick={handleCallMediatorBot}
-              size="lg" 
-              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            <a 
+              href="tel:+15551237323"
+              className="inline-flex items-center justify-center bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
             >
               <Bot className="w-5 h-5 mr-2" />
               Call Mediator Bot
-            </Button>
+            </a>
             
             <Button 
               onClick={handleAddToSignal}
