@@ -4,10 +4,10 @@ import { MessageCircle, Bot, Phone, Link, Signal } from "lucide-react";
 
 const Hero = () => {
   const handleAddToSignal = () => {
-    // Copy webhook URL to clipboard
-    const webhookUrl = "https://cqxqvxfpvcdnympknfql.supabase.co/functions/v1/signal-webhook";
-    navigator.clipboard.writeText(webhookUrl);
-    alert("Signal webhook URL copied to clipboard! Configure your Signal bot to send messages to this endpoint.");
+    // Copy phone number to clipboard
+    const phoneNumber = "(650) 761-9680";
+    navigator.clipboard.writeText(phoneNumber);
+    alert("Phone number copied to clipboard! Invite this number to your Signal group chat.");
   };
 
   const handleWebVoiceAgent = () => {
@@ -97,23 +97,17 @@ const Hero = () => {
           <div className="mt-12 p-6 bg-blue-50 rounded-2xl border border-blue-200">
             <h3 className="text-lg font-semibold text-blue-900 mb-3">Quick Setup for Signal</h3>
             <div className="text-sm text-blue-800 text-left space-y-2">
-              <p><strong>1.</strong> Click "Add MediatorBot to Signal Chat" to copy the webhook endpoint</p>
-              <p><strong>2.</strong> Configure your Signal bot to send group messages to this URL</p>
-              <p><strong>3.</strong> MediatorBot will automatically monitor conversations and mediate conflicts</p>
-              <p><strong>4.</strong> The bot uses GPT-4 to provide intelligent, context-aware mediation</p>
+              <p><strong>1.</strong> Just invite <strong>(650) 761-9680</strong> to your Signal group chat</p>
+              <p><strong>2.</strong> MediatorBot will automatically monitor conversations and mediate conflicts, intervening when necessary</p>
             </div>
             
-            {/* Webhook URL Link */}
+            {/* Commands Section */}
             <div className="mt-4 pt-4 border-t border-blue-200">
-              <Button
-                onClick={handleAddToSignal}
-                variant="ghost"
-                size="sm"
-                className="text-blue-700 hover:text-blue-900 hover:bg-blue-100"
-              >
-                <Link className="w-4 h-4 mr-2" />
-                Get Signal webhook URL
-              </Button>
+              <h4 className="text-sm font-semibold text-blue-900 mb-2">Commands:</h4>
+              <div className="text-sm text-blue-800 text-left space-y-1">
+                <p><code className="bg-blue-100 px-2 py-1 rounded">@mediatorbot pause</code> to pause monitoring</p>
+                <p><code className="bg-blue-100 px-2 py-1 rounded">@mediatorbot continue</code> to resume monitoring</p>
+              </div>
             </div>
           </div>
 
