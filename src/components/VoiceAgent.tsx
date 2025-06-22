@@ -121,7 +121,7 @@ const VoiceAgent = () => {
       id="voice-agent" 
       className={`transition-all duration-300 ${
         isExpanded 
-          ? 'fixed inset-4 z-50 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-3xl overflow-hidden' 
+          ? 'fixed inset-4 z-50 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-3xl overflow-hidden max-h-[calc(100vh-2rem)]' 
           : 'py-24 px-6 mx-auto max-w-4xl lg:px-8 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-3xl my-12'
       }`}
     >
@@ -146,7 +146,7 @@ const VoiceAgent = () => {
         </div>
 
         {/* Voice Agent Interface */}
-        <div className={`bg-white rounded-2xl shadow-xl p-8 mx-auto ${isExpanded ? 'flex-1 flex flex-col max-w-none w-full' : 'max-w-2xl'}`}>
+        <div className={`bg-white rounded-2xl shadow-xl p-8 mx-auto ${isExpanded ? 'flex-1 flex flex-col max-w-none w-full min-h-0' : 'max-w-2xl'}`}>
           {/* Connection Status */}
           <div className="flex items-center justify-center mb-6">
             <div className={`w-3 h-3 rounded-full mr-2 ${isConnected ? 'bg-green-500' : 'bg-gray-300'}`}></div>
@@ -157,7 +157,7 @@ const VoiceAgent = () => {
 
           {/* Messages */}
           {messages.length > 0 && (
-            <div className={`mb-6 overflow-y-auto bg-gray-50 rounded-xl p-4 space-y-3 ${isExpanded ? 'flex-1' : 'h-64'}`}>
+            <div className={`mb-6 overflow-y-auto bg-gray-50 rounded-xl p-4 space-y-3 ${isExpanded ? 'flex-1 min-h-0' : 'h-64'}`}>
               {messages.map((message, index) => (
                 <div
                   key={index}
@@ -190,7 +190,7 @@ const VoiceAgent = () => {
           )}
 
           {/* Controls */}
-          <div className="flex justify-center space-x-4">
+          <div className="flex justify-center space-x-4 flex-shrink-0">
             {!isListening ? (
               <Button
                 onClick={startVoiceAgent}
@@ -214,7 +214,7 @@ const VoiceAgent = () => {
 
           {/* Instructions */}
           {!isConnected && (
-            <div className="mt-6 p-4 bg-amber-50 rounded-lg border border-amber-200">
+            <div className="mt-6 p-4 bg-amber-50 rounded-lg border border-amber-200 flex-shrink-0">
               <p className="text-sm text-amber-800">
                 <strong>Demo Mode:</strong> This simulates the voice agent experience.
                 Click "Start Voice Agent" to begin, then speak naturally. The AI will respond with mediation suggestions.
