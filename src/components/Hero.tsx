@@ -1,4 +1,5 @@
 
+
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Bot, Phone, Link } from "lucide-react";
 
@@ -11,6 +12,11 @@ const Hero = () => {
   };
 
   const handleCallMediatorBot = () => {
+    // Scroll to voice agent section
+    document.getElementById('voice-agent')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleWebVoiceAgent = () => {
     // Scroll to voice agent section
     document.getElementById('voice-agent')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -65,6 +71,16 @@ const Hero = () => {
               <Phone className="w-5 h-5 mr-2" />
               Add MediatorBot to Signal Chat
             </Button>
+
+            <Button 
+              onClick={handleWebVoiceAgent}
+              variant="outline"
+              size="lg"
+              className="border-2 border-purple-300 text-purple-700 hover:bg-purple-50 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <MessageCircle className="w-5 h-5 mr-2" />
+              Web Voice Agent
+            </Button>
           </div>
 
           {/* Signal Setup Instructions */}
@@ -107,3 +123,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
