@@ -1,5 +1,4 @@
 
-
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Bot, Phone, Link } from "lucide-react";
 
@@ -51,41 +50,47 @@ const Hero = () => {
             <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl border border-green-200">
               <Phone className="w-5 h-5 text-green-600 mr-3" />
               <span className="text-2xl font-bold text-green-800 tracking-wide">
-                +1 (555) 123-PEACE
+                (650) 761-9680
               </span>
             </div>
             <p className="text-sm text-gray-500 mt-2">Call anytime for instant mediation support</p>
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-            <a 
-              href="tel:+15551237323"
-              className="inline-flex items-center justify-center bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-            >
-              <Bot className="w-5 h-5 mr-2" />
-              Call Mediator Bot
-            </a>
-            
-            <Button 
-              onClick={handleAddToSignal}
-              variant="outline"
-              size="lg"
-              className="border-2 border-indigo-300 text-indigo-700 hover:bg-indigo-50 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 transform hover:-translate-y-1"
-            >
-              <Phone className="w-5 h-5 mr-2" />
-              Add MediatorBot to Signal Chat
-            </Button>
+          <div className="flex flex-col gap-4 justify-center mt-10">
+            {/* First row - Call and Signal buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a 
+                href="tel:+16507619680"
+                className="inline-flex items-center justify-center bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-6 py-3 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              >
+                <Bot className="w-5 h-5 mr-2" />
+                Call Mediator Bot
+              </a>
+              
+              <Button 
+                onClick={handleAddToSignal}
+                variant="outline"
+                size="lg"
+                className="border-2 border-indigo-300 text-indigo-700 hover:bg-indigo-50 px-6 py-3 text-base font-semibold rounded-xl transition-all duration-300 transform hover:-translate-y-1"
+              >
+                <Phone className="w-5 h-5 mr-2" />
+                Add MediatorBot to Signal Chat
+              </Button>
+            </div>
 
-            <Button 
-              onClick={handleWebVoiceAgent}
-              variant="outline"
-              size="lg"
-              className="border-2 border-purple-300 text-purple-700 hover:bg-purple-50 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 transform hover:-translate-y-1"
-            >
-              <MessageCircle className="w-5 h-5 mr-2" />
-              Web Voice Agent
-            </Button>
+            {/* Second row - Web Voice Agent */}
+            <div className="flex justify-center">
+              <Button 
+                onClick={handleWebVoiceAgent}
+                variant="outline"
+                size="lg"
+                className="border-2 border-purple-300 text-purple-700 hover:bg-purple-50 px-6 py-3 text-base font-semibold rounded-xl transition-all duration-300 transform hover:-translate-y-1"
+              >
+                <MessageCircle className="w-5 h-5 mr-2" />
+                Web Voice Agent
+              </Button>
+            </div>
           </div>
 
           {/* Signal Setup Instructions */}
@@ -128,4 +133,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
