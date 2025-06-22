@@ -102,11 +102,21 @@ const Hero = () => {
             </div>
             
             {/* Commands Section */}
-            <div className="mt-4 pt-4 border-t border-blue-200">
-              <h4 className="text-sm font-semibold text-blue-900 mb-2">Commands:</h4>
-              <div className="text-sm text-blue-800 text-left space-y-1">
-                <p><code className="bg-blue-100 px-2 py-1 rounded">@mediatorbot pause</code> to pause monitoring</p>
-                <p><code className="bg-blue-100 px-2 py-1 rounded">@mediatorbot continue</code> to resume monitoring</p>
+            <div className="mt-6 pt-4 border-t border-blue-200">
+              <h4 className="text-base font-semibold text-blue-900 mb-4">Available Commands:</h4>
+              <div className="grid gap-3">
+                <div className="flex items-center justify-between p-3 bg-white rounded-lg border border-blue-100">
+                  <code className="text-sm font-mono bg-blue-50 px-3 py-1 rounded-md text-blue-700 border border-blue-200">
+                    @mediatorbot pause
+                  </code>
+                  <span className="text-sm text-blue-600 ml-4">Pause monitoring</span>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-white rounded-lg border border-blue-100">
+                  <code className="text-sm font-mono bg-blue-50 px-3 py-1 rounded-md text-blue-700 border border-blue-200">
+                    @mediatorbot continue
+                  </code>
+                  <span className="text-sm text-blue-600 ml-4">Resume monitoring</span>
+                </div>
               </div>
             </div>
           </div>
